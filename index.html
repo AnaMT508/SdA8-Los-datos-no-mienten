@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SdA 8 - Panel de Materiales Interactivos</title>
+    <title>SdA 8 - Panel de Materiales Interactivos y Documentación</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -20,7 +20,7 @@
         .tech-font { font-family: 'Orbitron', sans-serif; }
     </style>
 </head>
-<body class="flex flex-col items-center justify-center p-4 min-y-screen py-12">
+<body class="flex flex-col items-center justify-center p-4 min-h-screen py-12">
 
     <div class="max-w-2xl w-full bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden">
         
@@ -30,66 +30,113 @@
             <p class="text-sky-200 text-xs font-semibold uppercase tracking-widest mt-2">Matemáticas 4.º ESO B · Banco de Recursos Digitales</p>
         </div>
 
-        <div class="p-8 space-y-4">
-            <p class="text-sm text-slate-600 text-center mb-6">
-                Selecciona la herramienta o el instrumento de evaluación interactiva que deseas abrir:
-            </p>
+        <div class="p-8 space-y-8">
+            
+            <div>
+                <h2 class="tech-font text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 border-b border-slate-100 pb-2">🕹️ Instrumentos e Interactivos</h2>
+                <div class="grid grid-cols-1 gap-3">
+                    
+                    <a href="tablero_misiones_SdA8.html" class="group flex items-center justify-between p-4 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 rounded-lg transition">
+                        <div class="flex items-center gap-4">
+                            <div class="w-11 h-11 bg-blue-100 text-[#185FA5] group-hover:bg-[#185FA5] group-hover:text-white rounded-lg flex items-center justify-center font-bold text-lg transition">
+                                🗺️
+                            </div>
+                            <div>
+                                <h3 class="tech-font text-xs font-bold text-slate-800 group-hover:text-[#185FA5]">Tablero de Misiones Gamificado</h3>
+                                <p class="text-[11px] text-slate-500">Mapa de seguimiento del reto central y las misiones de la unidad.</p>
+                            </div>
+                        </div>
+                        <span class="text-slate-400 group-hover:text-[#185FA5] font-bold transition-transform group-hover:translate-x-1">→</span>
+                    </a>
 
-            <div class="grid grid-cols-1 gap-3">
-                
-                <a href="tablero_misiones_SdA8.html" class="group flex items-center justify-between p-4 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 rounded-lg transition">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-blue-100 text-[#185FA5] group-hover:bg-[#185FA5] group-hover:text-white rounded-lg flex items-center justify-center font-bold text-xl transition">
-                            🗺️
+                    <a href="documentos/tarjetas_de_fenomenos.html" class="group flex items-center justify-between p-4 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 rounded-lg transition">
+                        <div class="flex items-center gap-4">
+                            <div class="w-11 h-11 bg-blue-100 text-[#185FA5] group-hover:bg-[#185FA5] group-hover:text-white rounded-lg flex items-center justify-center font-bold text-lg transition">
+                                🃏
+                            </div>
+                            <div>
+                                <h3 class="tech-font text-xs font-bold text-slate-800 group-hover:text-[#185FA5]">Tarjetas de Fenómenos</h3>
+                                <p class="text-[11px] text-slate-500">Material interactivo para la introducción a la probabilidad y estadística.</p>
+                            </div>
                         </div>
-                        <div>
-                            <h2 class="tech-font text-sm font-bold text-slate-800 group-hover:text-[#185FA5]">Tablero de Misiones Gamificado</h2>
-                            <p class="text-xs text-slate-500">Mapa interactivo de seguimiento del reto central y las misiones de la unidad.</p>
-                        </div>
-                    </div>
-                    <span class="text-slate-400 group-hover:text-[#185FA5] font-bold transition-transform group-hover:translate-x-1">→</span>
-                </a>
+                        <span class="text-slate-400 group-hover:text-[#185FA5] font-bold transition-transform group-hover:translate-x-1">→</span>
+                    </a>
 
-                <a href="rubrica_coev_sda_8.html" class="group flex items-center justify-between p-4 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 rounded-lg transition">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-blue-100 text-[#185FA5] group-hover:bg-[#185FA5] group-hover:text-white rounded-lg flex items-center justify-center font-bold text-xl transition">
-                            📊
+                    <a href="rubrica_coev_sda_8.html" class="group flex items-center justify-between p-4 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 rounded-lg transition">
+                        <div class="flex items-center gap-4">
+                            <div class="w-11 h-11 bg-blue-100 text-[#185FA5] group-hover:bg-[#185FA5] group-hover:text-white rounded-lg flex items-center justify-center font-bold text-lg transition">
+                                📊
+                            </div>
+                            <div>
+                                <h3 class="tech-font text-xs font-bold text-slate-800 group-hover:text-[#185FA5]">Rúbrica de Coevaluación Digital</h3>
+                                <p class="text-[11px] text-slate-500">Cálculo de notas automatizado para la evaluación entre equipos.</p>
+                            </div>
                         </div>
-                        <div>
-                            <h2 class="tech-font text-sm font-bold text-slate-800 group-hover:text-[#185FA5]">Rúbrica de Coevaluación digital</h2>
-                            <p class="text-xs text-slate-500">Evaluación interactiva y cálculo de notas del informe divulgativo entre equipos.</p>
-                        </div>
-                    </div>
-                    <span class="text-slate-400 group-hover:text-[#185FA5] font-bold transition-transform group-hover:translate-x-1">→</span>
-                </a>
+                        <span class="text-slate-400 group-hover:text-[#185FA5] font-bold transition-transform group-hover:translate-x-1">→</span>
+                    </a>
 
-                <a href="ficha_analisis_critico_sda_8.html" class="group flex items-center justify-between p-4 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 rounded-lg transition">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-blue-100 text-[#185FA5] group-hover:bg-[#185FA5] group-hover:text-white rounded-lg flex items-center justify-center font-bold text-xl transition">
-                            🔍
+                    <a href="ficha_analisis_critico_sda_8.html" class="group flex items-center justify-between p-4 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 rounded-lg transition">
+                        <div class="flex items-center gap-4">
+                            <div class="w-11 h-11 bg-blue-100 text-[#185FA5] group-hover:bg-[#185FA5] group-hover:text-white rounded-lg flex items-center justify-center font-bold text-lg transition">
+                                🔍
+                            </div>
+                            <div>
+                                <h3 class="tech-font text-xs font-bold text-slate-800 group-hover:text-[#185FA5]">Ficha de Análisis Crítico</h3>
+                                <p class="text-[11px] text-slate-500">Auditoría digital para detectar sesgos, falacias y fake news.</p>
+                            </div>
                         </div>
-                        <div>
-                            <h2 class="tech-font text-sm font-bold text-slate-800 group-hover:text-[#185FA5]">Ficha de Análisis Crítico</h2>
-                            <p class="text-xs text-slate-500">Auditoría digital para detectar sesgos, falacias y fake news estadísticas.</p>
-                        </div>
-                    </div>
-                    <span class="text-slate-400 group-hover:text-[#185FA5] font-bold transition-transform group-hover:translate-x-1">→</span>
-                </a>
+                        <span class="text-slate-400 group-hover:text-[#185FA5] font-bold transition-transform group-hover:translate-x-1">→</span>
+                    </a>
 
-                <a href="diana_autoevaluaci_n_sda_8.html" class="group flex items-center justify-between p-4 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 rounded-lg transition">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 bg-blue-100 text-[#185FA5] group-hover:bg-[#185FA5] group-hover:text-white rounded-lg flex items-center justify-center font-bold text-xl transition">
-                            🎯
+                    <a href="diana_autoevaluaci_n_sda_8.html" class="group flex items-center justify-between p-4 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 rounded-lg transition">
+                        <div class="flex items-center gap-4">
+                            <div class="w-11 h-11 bg-blue-100 text-[#185FA5] group-hover:bg-[#185FA5] group-hover:text-white rounded-lg flex items-center justify-center font-bold text-lg transition">
+                                🎯
+                            </div>
+                            <div>
+                                <h3 class="tech-font text-xs font-bold text-slate-800 group-hover:text-[#185FA5]">Diana de Autoevaluación Individual</h3>
+                                <p class="text-[11px] text-slate-500">Gráfico de radar interactivo para medir el desempeño personal.</p>
+                            </div>
                         </div>
-                        <div>
-                            <h2 class="tech-font text-sm font-bold text-slate-800 group-hover:text-[#185FA5]">Diana de Autoevaluación Individual</h2>
-                            <p class="text-xs text-slate-500">Gráfico de radar interactivo para medir el desempeño, implicación y aprendizaje.</p>
-                        </div>
-                    </div>
-                    <span class="text-slate-400 group-hover:text-[#185FA5] font-bold transition-transform group-hover:translate-x-1">→</span>
-                </a>
+                        <span class="text-slate-400 group-hover:text-[#185FA5] font-bold transition-transform group-hover:translate-x-1">→</span>
+                    </a>
 
+                </div>
             </div>
+
+            <div>
+                <h2 class="tech-font text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 border-b border-slate-100 pb-2">📁 Documentación y Entregables</h2>
+                <div class="grid grid-cols-1 gap-3">
+                    
+                    <a href="documentos/Carta_IGE_sda8.pdf" target="_blank" class="group flex items-center justify-between p-4 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 rounded-lg transition">
+                        <div class="flex items-center gap-4">
+                            <div class="w-11 h-11 bg-red-50 text-red-600 group-hover:bg-red-600 group-hover:text-white rounded-lg flex items-center justify-center font-bold text-lg transition">
+                                📄
+                            </div>
+                            <div>
+                                <h3 class="tech-font text-xs font-bold text-slate-800 group-hover:text-[#185FA5]">Carta del IGE (PDF)</h3>
+                                <p class="text-[11px] text-slate-500">Contextualización del reto central basada en el Instituto Galego de Estatística.</p>
+                            </div>
+                        </div>
+                        <span class="text-slate-400 group-hover:text-[#185FA5] font-bold transition-transform group-hover:translate-x-1">↓</span>
+                    </a>
+
+                    <a href="documentos/Plantilla_informe_divulgativo_SdA8.docx" class="group flex items-center justify-between p-4 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 rounded-lg transition">
+                        <div class="flex items-center gap-4">
+                            <div class="w-11 h-11 bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white rounded-lg flex items-center justify-center font-bold text-lg transition">
+                                📝
+                            </div>
+                            <div>
+                                <h3 class="tech-font text-xs font-bold text-slate-800 group-hover:text-[#185FA5]">Plantilla del Informe Divulgativo (Word)</h3>
+                                <p class="text-[11px] text-slate-500">Estructura base descargable para la redacción final del análisis estadístico.</p>
+                            </div>
+                        </div>
+                        <span class="text-slate-400 group-hover:text-[#185FA5] font-bold transition-transform group-hover:translate-x-1">↓</span>
+                    </a>
+
+                </div>
+            </div>
+
         </div>
 
         <div class="bg-slate-50 px-8 py-4 border-t border-slate-100 text-center">
