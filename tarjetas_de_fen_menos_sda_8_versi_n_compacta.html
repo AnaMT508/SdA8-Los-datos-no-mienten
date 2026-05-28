@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SdA 8 - Tarjetas de Fenómenos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* 1. RESET Y CONFIGURACIÓN */
+        * { box-sizing: border-box; }
+        body { 
+            margin: 0; 
+            padding: 0; 
+            background-color: #f1f5f9; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh;
+        }
+
+        /* Contenedor estricto (1280x720) para evitar cortes en PDF */
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            background-color: white;
+            padding: 30px 45px;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Empuja la nota al final */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .tech-font { font-family: 'Orbitron', sans-serif; }
+
+        /* 2. CABECERA */
+        .header {
+            border-bottom: 2px solid #185FA5;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        /* 3. GRID COMPACTO */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 12px;
+            flex-grow: 1; /* Ocupa el espacio central */
+            max-height: 520px; /* Limita la altura para que no empuje la nota */
+        }
+
+        .card {
+            background-color: #EFF6FF;
+            border: 1.5px solid #185FA5;
+            border-radius: 10px;
+            padding: 10px 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .card-id {
+            position: absolute;
+            top: 5px;
+            right: 12px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: #185FA5;
+            opacity: 0.3;
+        }
+
+        .phenomenon-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 2px;
+            line-height: 1.2;
+        }
+
+        .variable-text {
+            font-size: 0.8rem;
+            color: #334155;
+            line-height: 1.3;
+        }
+
+        .variable-label {
+            font-weight: 700;
+            color: #185FA5;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            margin-right: 4px;
+        }
+
+        .source {
+            font-size: 0.65rem;
+            color: #94a3b8;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        /* 4. NOTA DE AYUDA (AJUSTADA) */
+        .help-box {
+            background-color: #fffbeb;
+            border: 1px solid #f59e0b;
+            border-radius: 6px;
+            padding: 10px 18px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0; /* Evita que la nota se encoja */
+        }
+
+        .help-box i { color: #d97706; font-size: 1.1rem; }
+        .help-box p { font-size: 0.85rem; color: #92400e; margin: 0; font-weight: 600; }
+
+        @media print {
+            body { background: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .slide-container { box-shadow: none; border: none; margin: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slide-container">
+        <div class="header">
+            <div>
+                <h1 class="tech-font text-[#185FA5] text-xl font-bold uppercase tracking-tight">Catálogo de Fenómenos Estadísticos</h1>
+                <p class="text-[10px] font-semibold text-slate-500 uppercase">SdA 8: Los datos no mienten… si sabemos interpretarlos</p>
+            </div>
+            <div class="text-right">
+                <p class="tech-font text-[9px] text-slate-400 uppercase tracking-widest leading-none">Matemáticas 4.º ESO B</p>
+                <p class="tech-font text-[9px] text-slate-400 uppercase tracking-widest mt-1 italic">Módulo de Auditoría de Datos</p>
+            </div>
+        </div>
+
+        <div class="grid-layout">
+            
+            <div class="card">
+                <span class="card-id">01</span>
+                <div class="phenomenon-title">🌡️ Temperatura media en A Coruña (1990–2023)</div>
+                <div class="variable-text">
+                    <div><span class="variable-label">Principal:</span>Temp. media anual (°C)</div>
+                    <div><span class="variable-label">Bivariante:</span>Año (Tendencia temporal)</div>
+                </div>
+                <div class="source">Fuente: AEMET / Meteogalicia</div>
+            </div>
+
+            <div class="card">
+                <span class="card-id">02</span>
+                <div class="phenomenon-title">💼 Tasa de desempleo en Galicia (2010–2023)</div>
+                <div class="variable-text">
+                    <div><span class="variable-label">Principal:</span>Tasa de desempleo (%)</div>
+                    <div><span class="variable-label">Bivariante:</span>Año / PIB per cápita provincial</div>
+                </div>
+                <div class="source">Fuente: IGE — EPA</div>
+            </div>
+
+            <div class="card">
+                <span class="card-id">03</span>
+                <div class="phenomenon-title">👶 Evolución de la natalidad en Galicia (2000–2023)</div>
+                <div class="variable-text">
+                    <div><span class="variable-label">Principal:</span>Tasa de natalidad (‰)</div>
+                    <div><span class="variable-label">Bivariante:</span>Año / Renta media por hogar</div>
+                </div>
+                <div class="source">Fuente: IGE — Movemento Natural</div>
+            </div>
+
+            <div class="card">
+                <span class="card-id">04</span>
+                <div class="phenomenon-title">🎓 Abandono escolar temprano (2010–2023)</div>
+                <div class="variable-text">
+                    <div><span class="variable-label">Principal:</span>% abandono escolar</div>
+                    <div><span class="variable-label">Bivariante:</span>Año / Tasa desempleo juvenil</div>
+                </div>
+                <div class="source">Fuente: INE — EPA</div>
+            </div>
+
+            <div class="card">
+                <span class="card-id">05</span>
+                <div class="phenomenon-title">💶 Renta media por municipio gallego</div>
+                <div class="variable-text">
+                    <div><span class="variable-label">Principal:</span>Renta media habitante (€)</div>
+                    <div><span class="variable-label">Bivariante:</span>Tamaño municipio (Hab.)</div>
+                </div>
+                <div class="source">Fuente: INE — Atlas de renta</div>
+            </div>
+
+            <div class="card">
+                <span class="card-id">06</span>
+                <div class="phenomenon-title">♻️ Residuos y reciclaje en Galicia (2010–2023)</div>
+                <div class="variable-text">
+                    <div><span class="variable-label">Principal:</span>kg residuos por habitante</div>
+                    <div><span class="variable-label">Bivariante:</span>Año / % tasa reciclaje</div>
+                </div>
+                <div class="source">Fuente: IGE — Residuos</div>
+            </div>
+
+            <div class="card">
+                <span class="card-id">07</span>
+                <div class="phenomenon-title">🔥 Incendios forestales en Galicia (2000–2023)</div>
+                <div class="variable-text">
+                    <div><span class="variable-label">Principal:</span>Nº incendios / ha quemadas</div>
+                    <div><span class="variable-label">Bivariante:</span>Año / Temp. media verano</div>
+                </div>
+                <div class="source">Fuente: IGE / Medio Rural</div>
+            </div>
+
+            <div class="card">
+                <span class="card-id">08</span>
+                <div class="phenomenon-title">🏠 Precio de la vivienda en municipios gallegos</div>
+                <div class="variable-text">
+                    <div><span class="variable-label">Principal:</span>Precio medio (€/m²)</div>
+                    <div><span class="variable-label">Bivariante:</span>Renta media / Tamaño municipio</div>
+                </div>
+                <div class="source">Fuente: INE — Precios</div>
+            </div>
+
+        </div>
+
+        <div class="help-box">
+            <i class="fa-solid fa-circle-info"></i>
+            <p><strong>¿No encontráis los datos de vuestra opción?</strong> Usad el comodín de equipo o consultad al docente antes de cambiar de fenómeno.</p>
+        </div>
+    </div>
+
+</body>
+</html>
