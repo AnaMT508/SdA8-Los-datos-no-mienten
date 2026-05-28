@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rúbrica Coevaluación - SdA 8</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-blue: #185FA5;
+            --brand-light: #EFF6FF;
+            --brand-accent: #38bdf8;
+            --slate-text: #1e293b;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+            color: var(--slate-text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        .tech-font { font-family: 'Orbitron', sans-serif; }
+        
+        .page-container {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 1. CABECERAS */
+        .header-banner {
+            border-left: 6px solid var(--brand-blue);
+            background: var(--brand-light);
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .instructions-box {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid #94a3b8;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        /* 2. INPUTS Y TEXTAREAS */
+        .input-field {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px dashed #cbd5e1;
+            padding: 4px 2px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            color: var(--brand-blue);
+            font-weight: 600;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .input-field:focus { border-bottom: 1px solid var(--brand-blue); }
+        textarea.input-field { resize: none; height: 38px; line-height: 1.4; font-weight: 400; color: var(--slate-text); }
+
+        /* 3. TABLA DE RÚBRICA */
+        .rubric-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            table-layout: fixed;
+        }
+        .rubric-table th {
+            background-color: var(--brand-blue);
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 10px 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid var(--brand-blue);
+        }
+        .rubric-table td {
+            border: 1px solid #e2e8f0;
+            padding: 10px 8px;
+            font-size: 0.75rem;
+            vertical-align: top;
+            line-height: 1.3;
+        }
+
+        .col-aspect { width: 18%; }
+        .col-level { width: 18.5%; cursor: pointer; transition: all 0.2s; }
+        .col-score { width: 8%; text-align: center; vertical-align: middle !important; background-color: #f8fafc; }
+
+        .col-level:hover { background-color: #f1f5f9; }
+        .col-level.selected { background-color: var(--brand-blue) !important; color: white !important; }
+        .col-level.selected .level-badge { background-color: var(--brand-accent); color: var(--brand-blue); }
+
+        .level-badge {
+            display: inline-block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.6rem;
+            font-weight: bold;
+            background-color: #f1f5f9;
+            color: #64748b;
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin-bottom: 6px;
+        }
+
+        .score-display {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--brand-blue);
+        }
+
+        /* 4. OBSERVACIONES */
+        .obs-box {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        .score-panel {
+            border: 2px solid var(--brand-blue);
+            background-color: var(--brand-light);
+            padding: 15px 20px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .page-container { box-shadow: none; border: none; margin: 0; padding: 0; width: 100%; }
+            .no-print { display: none; }
+            .input-field { border-bottom: 1px dotted #cbd5e1 !important; }
+            .col-level.selected { background-color: #185FA5 !important; color: white !important; }
+            .col-level.selected .level-badge { background-color: #38bdf8 !important; color: #185FA5 !important; }
+            .page-break { page-break-before: always; margin-top: 30px; padding-top: 30px; border-top: 1px dashed #cbd5e1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="no-print fixed top-4 right-4 z-50 flex gap-3">
+        <div class="bg-slate-800 text-white px-4 py-2 rounded-full text-xs self-center shadow">
+            Evaluación digital activa
+        </div>
+        <button onclick="window.print()" class="bg-[#185FA5] hover:bg-blue-700 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg transition">
+            📥 Imprimir / Guardar PDF
+        </button>
+    </div>
+
+    <div class="page-container">
+        
+        <!-- CABECERA -->
+        <div class="header-banner">
+            <div class="flex justify-between items-start">
+                <div>
+                    <h1 class="tech-font text-lg font-bold text-[#185FA5] uppercase tracking-tight">Rúbrica de Coevaluación entre Equipos</h1>
+                    <div class="text-xs font-semibold text-slate-600 mt-1 uppercase">SdA 8: Los datos no mienten · Matemáticas 4.º ESO B</div>
+                </div>
+                <div class="text-right text-[10px] text-slate-500 leading-tight">
+                    <strong>Instrumento:</strong> Rúbrica de coevaluación<br>
+                    <strong>Producto:</strong> Informe divulgativo<br>
+                    <strong>Sesión:</strong> 11
+                </div>
+            </div>
+        </div>
+
+        <div class="instructions-box">
+            <h2 class="tech-font text-[10px] font-bold text-slate-700 uppercase mb-2">🧭 Instrucciones para el equipo evaluador</h2>
+            <ul class="list-disc pl-5 text-[11px] text-slate-600 space-y-1">
+                <li>Leed con atención el informe del equipo que os ha asignado el docente.</li>
+                <li>Haced clic en el nivel que mejor describe el trabajo para cada ítem.</li>
+                <li>Escribid un comentario constructivo en el apartado de observaciones: <strong>el objetivo es ayudarles a mejorar antes de la entrega final</strong>.</li>
+            </ul>
+        </div>
+
+        <!-- IDENTIFICACIÓN -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            <div>
+                <label class="text-[9px] font-bold text-slate-400 uppercase block mb-1">Equipo Evaluador</label>
+                <input type="text" class="input-field" placeholder="Vuestro equipo...">
+            </div>
+            <div>
+                <label class="text-[9px] font-bold text-slate-400 uppercase block mb-1">Equipo Evaluado</label>
+                <input type="text" class="input-field" placeholder="Equipo que corregís...">
+            </div>
+            <div class="md:col-span-2">
+                <label class="text-[9px] font-bold text-slate-400 uppercase block mb-1">Fenómeno Analizado</label>
+                <input type="text" class="input-field" placeholder="Tema del informe (Ej: Evolución de natalidad)...">
+            </div>
+        </div>
+
+        <!-- TABLA RÚBRICA -->
+        <table class="rubric-table">
+            <thead>
+                <tr>
+                    <th class="col-aspect">CE / Aspecto</th>
+                    <th class="col-level">Nivel 1 — Inicial</th>
+                    <th class="col-level">Nivel 2 — Básico</th>
+                    <th class="col-level">Nivel 3 — Medio</th>
+                    <th class="col-level">Nivel 4 — Excelente</th>
+                    <th class="col-score">Marcado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Ítem 1 -->
+                <tr id="row-0">
+                    <td class="font-semibold text-slate-700 col-aspect">
+                        <div class="text-[9px] text-[#185FA5] font-bold tech-font mb-1">CE5.1 / CE5.2</div>
+                        Análisis estadístico y gráficos
+                        <div class="text-[9px] font-normal text-slate-500 mt-1 italic">¿Están bien elegidos los gráficos? ¿Se interpretan las medidas (media, moda) en contexto?</div>
+                    </td>
+                    <td class="col-level" onclick="selectLevel(0, 1)">
+                        <span class="level-badge">NIVEL 1</span><br>
+                        Los gráficos están mal hechos o no pegan con los datos. Las medidas tienen errores o no se explican.
+                    </td>
+                    <td class="col-level" onclick="selectLevel(0, 2)">
+                        <span class="level-badge">NIVEL 2</span><br>
+                        Los gráficos están bien, pero solo describen lo obvio sin profundizar. Las medidas aparecen "sueltas".
+                    </td>
+                    <td class="col-level" onclick="selectLevel(0, 3)">
+                        <span class="level-badge">NIVEL 3</span><br>
+                        Gráficos adecuados y bien comentados. Las medidas estadísticas ayudan a entender mejor el fenómeno.
+                    </td>
+                    <td class="col-level" onclick="selectLevel(0, 4)">
+                        <span class="level-badge">NIVEL 4</span><br>
+                        Gráficos perfectos y muy visuales. Las medidas se usan para comparar o descubrir detalles profundos del fenómeno.
+                    </td>
+                    <td class="col-score"><span id="score-0" class="score-display">_ / 4</span></td>
+                </tr>
+
+                <!-- Ítem 2 -->
+                <tr id="row-1">
+                    <td class="font-semibold text-slate-700 col-aspect">
+                        <div class="text-[9px] text-[#185FA5] font-bold tech-font mb-1">CE5.5</div>
+                        Análisis bivariante
+                        <div class="text-[9px] font-normal text-slate-500 mt-1 italic">¿Se explica la relación entre las dos variables? ¿Entienden la correlación y la regresión?</div>
+                    </td>
+                    <td class="col-level" onclick="selectLevel(1, 1)">
+                        <span class="level-badge">NIVEL 1</span><br>
+                        No hay análisis bivariante o está todo mal. No explican cómo se relacionan las variables.
+                    </td>
+                    <td class="col-level" onclick="selectLevel(1, 2)">
+                        <span class="level-badge">NIVEL 2</span><br>
+                        Mencionan que hay relación, pero no dicen si es fuerte, débil, positiva o negativa. La recta de regresión no se interpreta.
+                    </td>
+                    <td class="col-level" onclick="selectLevel(1, 3)">
+                        <span class="level-badge">NIVEL 3</span><br>
+                        Explican claramente la dirección y fuerza de la correlación. Entienden qué significa la recta de regresión en la realidad.
+                    </td>
+                    <td class="col-level" onclick="selectLevel(1, 4)">
+                        <span class="level-badge">NIVEL 4</span><br>
+                        Todo lo del nivel 3 + valoran si la predicción es fiable (usando R²) y si esa relación tiene sentido lógico.
+                    </td>
+                    <td class="col-score"><span id="score-1" class="score-display">_ / 4</span></td>
+                </tr>
+
+                <!-- Ítem 3 -->
+                <tr id="row-2">
+                    <td class="font-semibold text-slate-700 col-aspect">
+                        <div class="text-[9px] text-[#185FA5] font-bold tech-font mb-1">CE5.6 / CE6.3</div>
+                        Pensamiento crítico
+                        <div class="text-[9px] font-normal text-slate-500 mt-1 italic">¿Saben qué dicen, sugieren o no prueban los datos? ¿Evitan confundir correlación y causalidad?</div>
+                    </td>
+                    <td class="col-level" onclick="selectLevel(2, 1)">
+                        <span class="level-badge">NIVEL 1</span><br>
+                        Afirman cosas que los datos no demuestran o confunden claramente correlación con causalidad.
+                    </td>
+                    <td class="col-level" onclick="selectLevel(2, 2)">
+                        <span class="level-badge">NIVEL 2</span><br>
+                        Algunas conclusiones son buenas, pero otras son demasiado exageradas o ignoran que puede haber causalidades falsas.
+                    </td>
+                    <td class="col-level" onclick="selectLevel(2, 3)">
+                        <span class="level-badge">NIVEL 3</span><br>
+                        Diferencian bien lo que es seguro y lo que es solo una tendencia. No confunden causalidad e identifican límites de los datos.
+                    </td>
+                    <td class="col-level" onclick="selectLevel(2, 4)">
+                        <span class="level-badge">NIVEL 4</span><br>
+                        Crítica impecable. Detectan posibles "variables ocultas" que podrían engañarnos y detallan muy bien los límites de su estudio.
+                    </td>
+                    <td class="col-score"><span id="score-2" class="score-display">_ / 4</span></td>
+                </tr>
+
+                <!-- Ítem 4 -->
+                <tr id="row-3">
+                    <td class="font-semibold text-slate-700 col-aspect">
+                        <div class="text-[9px] text-[#185FA5] font-bold tech-font mb-1">CE5.7 / CE5.1</div>
+                        Comunicación divulgativa
+                        <div class="text-[9px] font-normal text-slate-500 mt-1 italic">¿Entendería este informe cualquier ciudadano? ¿Está bien estructurado y en contexto?</div>
+                    </td>
+                    <td class="col-level" onclick="selectLevel(3, 1)">
+                        <span class="level-badge">NIVEL 1</span><br>
+                        Es un lío leerlo. Parece un examen de mates, lleno de jerga o sin estructura que guíe al lector normal.
+                    </td>
+                    <td class="col-level" onclick="selectLevel(3, 2)">
+                        <span class="level-badge">NIVEL 2</span><br>
+                        Se entiende a medias. Hay apartados desconectados o palabras técnicas sin explicar. Falta contexto del mundo real.
+                    </td>
+                    <td class="col-level" onclick="selectLevel(3, 3)">
+                        <span class="level-badge">NIVEL 3</span><br>
+                        Muy accesible y ordenado. Ponen ejemplos del mundo real para que el lector entienda por qué importan esos datos.
+                    </td>
+                    <td class="col-level" onclick="selectLevel(3, 4)">
+                        <span class="level-badge">NIVEL 4</span><br>
+                        Digno de una revista de divulgación. Te engancha, explica la estadística con claridad y conecta los datos con el día a día.
+                    </td>
+                    <td class="col-score"><span id="score-3" class="score-display">_ / 4</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- SALTO DE PÁGINA PARA IMPRESIÓN -->
+        <div class="page-break"></div>
+
+        <!-- OBSERVACIONES -->
+        <h2 class="tech-font text-xs font-bold text-[#185FA5] uppercase border-b-2 border-[#185FA5] pb-1 mt-6 mb-4">📋 Observaciones Detalladas</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div class="obs-box">
+                <h3 class="text-[10px] font-bold text-slate-700 uppercase mb-2">Ítem 1 — Análisis y gráficos</h3>
+                <div class="text-xs text-slate-600 mb-2"><strong>Qué está bien:</strong> <textarea class="input-field" oninput="autoGrow(this)"></textarea></div>
+                <div class="text-xs text-slate-600"><strong>Qué podría mejorar:</strong> <textarea class="input-field" oninput="autoGrow(this)"></textarea></div>
+            </div>
+            
+            <div class="obs-box">
+                <h3 class="text-[10px] font-bold text-slate-700 uppercase mb-2">Ítem 2 — Análisis bivariante</h3>
+                <div class="text-xs text-slate-600 mb-2"><strong>Qué está bien:</strong> <textarea class="input-field" oninput="autoGrow(this)"></textarea></div>
+                <div class="text-xs text-slate-600"><strong>Qué podría mejorar:</strong> <textarea class="input-field" oninput="autoGrow(this)"></textarea></div>
+            </div>
+            
+            <div class="obs-box">
+                <h3 class="text-[10px] font-bold text-slate-700 uppercase mb-2">Ítem 3 — Pensamiento crítico</h3>
+                <div class="text-xs text-slate-600 mb-2"><strong>Qué está bien:</strong> <textarea class="input-field" oninput="autoGrow(this)"></textarea></div>
+                <div class="text-xs text-slate-600"><strong>Qué podría mejorar:</strong> <textarea class="input-field" oninput="autoGrow(this)"></textarea></div>
+            </div>
+            
+            <div class="obs-box">
+                <h3 class="text-[10px] font-bold text-slate-700 uppercase mb-2">Ítem 4 — Comunicación divulgativa</h3>
+                <div class="text-xs text-slate-600 mb-2"><strong>Qué está bien:</strong> <textarea class="input-field" oninput="autoGrow(this)"></textarea></div>
+                <div class="text-xs text-slate-600"><strong>Qué podría mejorar:</strong> <textarea class="input-field" oninput="autoGrow(this)"></textarea></div>
+            </div>
+        </div>
+
+        <!-- COMENTARIO GLOBAL -->
+        <h2 class="tech-font text-xs font-bold text-[#185FA5] uppercase border-b-2 border-[#185FA5] pb-1 mb-4">💬 Comentario Global del Equipo Evaluador</h2>
+        <div class="space-y-4 px-2 mb-6">
+            <div>
+                <label class="text-xs font-semibold text-slate-700 block mb-1">¿Qué es lo más valioso del informe que habéis leído?</label>
+                <textarea class="input-field" oninput="autoGrow(this)" placeholder="Escribe aquí los puntos fuertes generales..."></textarea>
+            </div>
+            <div>
+                <label class="text-xs font-semibold text-slate-700 block mb-1">¿Cuál es el aspecto que más mejoraríais si fuerais ese equipo?</label>
+                <textarea class="input-field" oninput="autoGrow(this)" placeholder="Vuestro consejo principal..."></textarea>
+            </div>
+            <div>
+                <label class="text-xs font-semibold text-slate-700 block mb-1">¿Ha cambiado la lectura de este informe alguna idea que teníais sobre ese fenómeno?</label>
+                <textarea class="input-field" oninput="autoGrow(this)" placeholder="Reflexión sobre lo que habéis aprendido leyéndolo..."></textarea>
+            </div>
+        </div>
+
+        <!-- SISTEMA DE CALIFICACIÓN -->
+        <div class="score-panel mt-auto">
+            <div>
+                <h3 class="tech-font font-bold text-[#185FA5] text-xs uppercase tracking-wide">📐 Sistema de Calificación</h3>
+                <p class="text-[10px] text-slate-500 mt-1"><strong>Media:</strong> Suma de niveles ÷ 4 | <strong>Nota:</strong> Media × 2,5</p>
+            </div>
+            <div class="flex gap-6 items-center">
+                <div class="text-right">
+                    <span class="text-[9px] text-slate-400 font-bold uppercase block">Puntos Medios</span>
+                    <span id="display-media" class="tech-font text-lg font-bold text-slate-600">-- / 4.0</span>
+                </div>
+                <div class="border-l-2 border-blue-200 pl-6 text-right">
+                    <span class="text-[9px] text-slate-400 font-bold uppercase block">Calificación Final</span>
+                    <span id="display-nota" class="tech-font text-3xl font-bold text-[#185FA5]">-- / 10</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SCRIPT INTERACTIVO -->
+    <script>
+        const scores = [0, 0, 0, 0];
+
+        function autoGrow(element) {
+            element.style.height = "38px";
+            element.style.height = (element.scrollHeight) + "px";
+        }
+
+        function selectLevel(rowIndex, levelValue) {
+            scores[rowIndex] = levelValue;
+            
+            // UI Update de la fila
+            const row = document.getElementById(`row-${rowIndex}`);
+            const cells = row.querySelectorAll('.col-level');
+            
+            cells.forEach((cell, idx) => {
+                if (idx === (levelValue - 1)) {
+                    cell.classList.add('selected');
+                } else {
+                    cell.classList.remove('selected');
+                }
+            });
+
+            // Update score de la fila
+            document.getElementById(`score-${rowIndex}`).innerText = `${levelValue} / 4`;
+
+            // Calcular nota global
+            calculateSystem();
+        }
+
+        function calculateSystem() {
+            const allSelected = scores.every(s => s > 0);
+            
+            const displayMedia = document.getElementById('display-media');
+            const displayNota = document.getElementById('display-nota');
+
+            const sum = scores.reduce((a, b) => a + b, 0);
+            const media = sum / 4;
+            const nota = media * 2.5;
+
+            if (!allSelected) {
+                // Cálculo parcial
+                displayMedia.innerText = `${media.toFixed(1)} / 4.0`;
+                displayNota.innerText = `${nota.toFixed(1)} / 10`;
+            } else {
+                // Cálculo definitivo sin decimales si es exacto (ej. 7.5 en vez de 7.50)
+                displayMedia.innerText = `${media.toFixed(2)} / 4.0`;
+                displayNota.innerText = `${Number(nota.toFixed(2))} / 10`;
+                
+                // Efecto visual al completar
+                displayNota.style.transform = "scale(1.1)";
+                setTimeout(() => { displayNota.style.transform = "scale(1)"; }, 200);
+            }
+        }
+    </script>
+</body>
+</html>
+```
